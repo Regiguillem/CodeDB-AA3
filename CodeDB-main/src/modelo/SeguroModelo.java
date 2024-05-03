@@ -1,6 +1,7 @@
 package modelo;
 
 public class SeguroModelo {
+    private int id;
 
     private String tipo;
     private double precio;
@@ -20,4 +21,5 @@ public class SeguroModelo {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
+    public int getId() {return id;}
 }

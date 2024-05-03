@@ -2,12 +2,10 @@ package vista;
 
 import modelo.*;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SociosVista {
     private Scanner scanner;
-    private Datos datos = Datos.getInstance();
 
     public SociosVista() {
         this.scanner = new Scanner(System.in);
@@ -20,13 +18,11 @@ public class SociosVista {
         System.out.println("3. Añadir Socio Federado");
         System.out.println("4. Añadir Socio Infantil");
         System.out.println("5. Eliminar socio");
-        System.out.println("6. Mostrar socios filtrados:");
-        System.out.println("7. Mostrar factura mensual de socio:");
+        System.out.println("6. Mostrar socios filtrados");
+        System.out.println("7. Mostrar factura mensual de socio");
         System.out.println("0. Salir");
         System.out.print("Seleccione una opción: ");
-        int opcion = scanner.nextInt();
-        scanner.nextLine();
-        return opcion;
+        return scanner.nextInt();
     }
 
     public int solicitarNuevoTipoSeguro() {
@@ -34,21 +30,16 @@ public class SociosVista {
         System.out.println("1. Seguro Completo");
         System.out.println("2. Seguro Básico");
         System.out.print("Elija una opción: ");
-        int opcion = scanner.nextInt();
-        scanner.nextLine(); // Limpiar el buffer del scanner
-        return opcion;
+        return scanner.nextInt();
     }
 
-    public void mostrarMensaje (String mensaje){
+    public void mostrarMensaje(String mensaje) {
         System.out.println(mensaje);
     }
 
-    // Métodos para solicitar información al usuario
     public int solicitarNumeroSocio() {
         System.out.print("Introduzca el número de socio: ");
-        int codigo = scanner.nextInt();
-        scanner.nextLine();
-        return codigo;
+        return scanner.nextInt();
     }
 
     public String solicitarNombreSocio() {
@@ -68,8 +59,6 @@ public class SociosVista {
         System.out.print("Elija una opción: ");
 
         int opcionSeguro = scanner.nextInt();
-        scanner.nextLine(); // Limpiar el buffer del scanner
-
         switch (opcionSeguro) {
             case 1:
                 return new SeguroCompletoModelo();
@@ -81,10 +70,9 @@ public class SociosVista {
         }
     }
 
-    public int opcionFederacion(){
+    public int opcionFederacion() {
         System.out.println("Seleccione una opción válida: ");
-        int opcionFed = scanner.nextInt();
-        return opcionFed;
+        return scanner.nextInt();
     }
 
     public int solicitarNumeroSocioPadreMadre() {
@@ -100,7 +88,7 @@ public class SociosVista {
         System.out.println("Descuento en cuota: " + socioInfantil.getDescuento_cuota() + "%");
     }
 
-    public void mostrarSociosPorTipo() {
+    public int mostrarMenuFiltrado() {
         System.out.println("Seleccione el tipo de socios que desea ver:");
         System.out.println("1. Socios Estándar");
         System.out.println("2. Socios Federados");
@@ -109,86 +97,48 @@ public class SociosVista {
         System.out.println("0. Volver al menú anterior");
 
         int opcion = scanner.nextInt();
-        scanner.nextLine();
-        ArrayList<SocioEstandarModelo> listaEstandar = datos.getSociosEst();
-        ArrayList<SociosFederadosModelo> listaFederada = datos.getSociosFed();
-        ArrayList<SocioInfantilModelo> listaInfantil = datos.getSociosInf();
 
         switch (opcion) {
             case 1:
                 System.out.println("Mostrando socios estándar:");
-                mostrarSociosEst(listaEstandar);
                 break;
             case 2:
                 System.out.println("Mostrando socios federados:");
-                mostrarSociosFed(listaFederada);
                 break;
             case 3:
                 System.out.println("Mostrando socios infantiles:");
-                mostrarSociosInf(listaInfantil);
                 break;
             case 4:
                 System.out.println("Mostrando todos los socios:");
-                mostrarSocios();
                 break;
             case 0:
                 System.out.println("Volviendo al menú anterior.");
                 break;
             default:
                 System.out.println("Opción no válida.");
-        }
+        }return opcion;
     }
 
-    public void mostrarSociosEst(ArrayList<SocioEstandarModelo> sociosEst) {
-        System.out.println("Lista de Socios Estándar Disponibles:");
-        for (SocioEstandarModelo socio : sociosEst) {
-            System.out.println("Número de socio: " + socio.getN_socio() + ", Nombre: " + socio.getNombre() + ", Tipo de Seguro: " + socio.getSeguro().getTipo());
-        }
-    }
 
-    public void mostrarSociosFed(ArrayList<SociosFederadosModelo> listaFederada) {
-        if (listaFederada.isEmpty()) {
-            System.out.println("No hay socios federados.");
-        } else {
-            System.out.println("Lista de socios federados:");
-            for (SociosFederadosModelo socio : listaFederada) {
-                System.out.println("Número de socio: " + socio.getN_socio() + ", Nombre: " + socio.getNombre() + ", NIF: " + socio.getNif() + ", Código Federación: " + socio.getFederacion().getNombre());
-            }
-        }
-    }
-
-    public void mostrarSociosInf(ArrayList<SocioInfantilModelo> listaInfantil) {
-        if (listaInfantil.isEmpty()) {
-            System.out.println("No hay socios infantiles.");
-        } else {
-            System.out.println("Lista de socios infantiles:");
-            for (SocioInfantilModelo socio : listaInfantil) {
-                System.out.println("Número de socio: " + socio.getN_socio() + ", Nombre: " + socio.getNombre() + ", Socio Padre/Madre: " + socio.getN_socioPadreMadre().getNombre());
-            }
-        }
-    }
 
     public void mostrarSocios() {
-        for (SociosModelo socio : datos.getListaSocios()) {
+        System.out.println("Lista de socios:");
+        for (SociosModelo socio : socios) {// acabar de mirar como hacer esto ya que no existen los socios como tal
             System.out.println("Número de socio: " + socio.getN_socio());
             System.out.println("Nombre: " + socio.getNombre());
-            // Comprobar el tipo de socio y mostrar información específica según el tipo
             if (socio instanceof SocioEstandarModelo) {
                 SocioEstandarModelo socioEstandar = (SocioEstandarModelo) socio;
                 System.out.println("Tipo de socio: Estándar");
-                // Mostrar más información específica del socio estándar si es necesario
                 System.out.println("NIF: " + socioEstandar.getNif());
                 System.out.println("Seguro: " + socioEstandar.getSeguro().getTipo());
             } else if (socio instanceof SociosFederadosModelo) {
                 SociosFederadosModelo socioFederado = (SociosFederadosModelo) socio;
                 System.out.println("Tipo de socio: Federado");
-                // Mostrar más información específica del socio federado si es necesario
                 System.out.println("NIF: " + socioFederado.getNif());
                 System.out.println("Federación: " + socioFederado.getFederacion().getNombre());
             } else if (socio instanceof SocioInfantilModelo) {
                 SocioInfantilModelo socioInfantil = (SocioInfantilModelo) socio;
                 System.out.println("Tipo de socio: Infantil");
-                // Mostrar más información específica del socio infantil si es necesario
                 System.out.println("Número de socio del Padre/Madre: " + socioInfantil.getN_socioPadreMadre().getN_socio());
                 System.out.println("Descuento Cuota: " + socioInfantil.getDescuento_cuota());
             }
@@ -196,23 +146,23 @@ public class SociosVista {
         }
     }
 
-    public SociosModelo seleccionarSocio(ArrayList<SociosModelo> socios) {
-        // Mostrar la lista de socios disponibles para seleccionar
-        System.out.println("Seleccione un socio:");
 
-        for (int i = 0; i < socios.size(); i++) {
-            System.out.println((i + 1) + ". " + socios.get(i).getNombre());
-        }
-
-        // Leer la selección del usuario
-        int opcion;
-        do {
-            System.out.print("Opción: ");
-            opcion = scanner.nextInt();
-        } while (opcion < 1 || opcion > socios.size());
-
-        // Devolver el socio seleccionado
-        return socios.get(opcion - 1);
+    public void mostrarFactura(int numSocio, double importe) {
+        System.out.println("Factura mensual para el socio " + numSocio + ":");
+        System.out.println("Importe: $" + importe);
     }
-    //Faltan argumentos que pedir al usuario?
+    public String solicitarFederacion() {
+        System.out.print("Ingrese el código de la federación: ");
+        return scanner.nextLine();
+    }
+    public void mostrarFacturaMensual(FacturaModelo factura) {
+        if (factura != null) {
+            System.out.println("Factura Mensual:");
+            System.out.println("Fecha: " + factura.getFecha());
+            System.out.println("Importe: " + factura.getImporte());
+
+        } else {
+            System.out.println("No se encontró una factura para el socio y las fechas especificadas.");
+        }
+    }
 }

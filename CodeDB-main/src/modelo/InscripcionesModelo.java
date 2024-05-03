@@ -6,7 +6,6 @@ import java.time.LocalDate;
 
 public class InscripcionesModelo {
     //Atributos
-    private static int ultimaInscripcion = 1;
     private int n_inscripcion;
     private SociosModelo socio;
     private ExcursionesModelo excursion;
@@ -14,11 +13,16 @@ public class InscripcionesModelo {
 
     //Constructor
 
-    public InscripcionesModelo(SociosModelo socio, ExcursionesModelo excursion, LocalDate fechaInscripcion) {
-        this.n_inscripcion = ultimaInscripcion++;
+    public InscripcionesModelo(int n_inscripcion, SociosModelo socio, ExcursionesModelo excursion, LocalDate fechaInscripcion) {
+        this.n_inscripcion = n_inscripcion;
         this.socio = socio;
         this.excursion = excursion;
         this.fechaInscripcion = fechaInscripcion;
+    }
+
+    public InscripcionesModelo(int n_inscripcion){
+        this.n_inscripcion = n_inscripcion;
+
     }
 
     //Getters y Setters

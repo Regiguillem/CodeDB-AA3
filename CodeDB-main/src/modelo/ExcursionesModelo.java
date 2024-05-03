@@ -11,6 +11,10 @@ public class ExcursionesModelo {
     private int n_dias;
     private double precio;
 
+    public ExcursionesModelo(String codigo) {
+        this.codigo = codigo;
+    }
+
     //constructor
     public ExcursionesModelo(String codigo, String descripcion, LocalDate fecha, int n_dias, double precio) {
         this.codigo = codigo;

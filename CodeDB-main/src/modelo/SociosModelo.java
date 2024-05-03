@@ -1,20 +1,23 @@
 package modelo;
 
 public class SociosModelo {
-    //Atributos
-    private static int ultimoNumeroSocio = 1;
     private int n_socio;
     private String nombre;
+    private double cuota_mensual;
+    private String tipo_socio;
+    private String nif;
+    private FederacionesModelo federacion;
     private SeguroModelo seguro;
 
-    private double cuotaMensual;
-
-    //Constructor
-
-    public SociosModelo(String nombre) {
-        this.n_socio = ultimoNumeroSocio++;
+    // Constructor
+    public SociosModelo(int n_socio, String nombre, double cuota_mensual, String tipo_socio, String nif, FederacionesModelo federacion, SeguroModelo seguro) {
+        this.n_socio = n_socio;
         this.nombre = nombre;
-        this.cuotaMensual = 50;
+        this.cuota_mensual = cuota_mensual;
+        this.tipo_socio = tipo_socio;
+        this.nif = nif;
+        this.federacion = federacion;
+        this.seguro = seguro;
     }
 
     //Getters y Setters
@@ -44,10 +47,22 @@ public class SociosModelo {
     }
 
     public double getCuotaMensual() {
-        return cuotaMensual;
+        return cuota_mensual;
     }
 
     public void setCuotaMensual(double cuotaMensual) {
-        this.cuotaMensual = cuotaMensual;
+        this.cuota_mensual = cuotaMensual;
+    }
+
+    public void setTipoSocio(String tipoSocio) {
+    }
+    public String getTipoSocio() { return tipo_socio;
+    }
+    public FederacionesModelo getFederacion() { return federacion;
+    }
+    public void setNif(String nif) {
+    }
+
+    public String getNif() {return nif;
     }
 }
